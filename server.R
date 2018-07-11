@@ -28,6 +28,7 @@ shinyServer(function(input, output, session) {
     if (is.data.table(rv$pcapinput)){
       
       pcapinput<-rv$pcapinput
+      output$datatable<-renderDataTable(pcapinput,options = list(scrollX = TRUE))
       pcapinput[,source:=(ifelse(layer_2_src=="",as.character(layer_1_src),as.character(layer_2_src)))]
       pcapinput[,destination:=(ifelse(layer_2_dst=="",as.character(layer_1_dst),as.character(layer_2_dst)))]
       nodes<-unique(c(as.character(pcapinput$source),as.character(pcapinput$destination)))
