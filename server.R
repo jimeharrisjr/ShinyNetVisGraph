@@ -12,8 +12,8 @@ shinyServer(function(input, output, session) {
   observe({
     autoInvalidate()
     isolate({ if (rv$run) { 
-      
-      pcapinput <- sniff_pcap('en0', num = 10) 
+# Configure this section for your machine      
+      pcapinput <- sniff_pcap('en0', num = 10) # NOTE: this is for a Mac - on Linux or Windows, it would be something like "wlan0" for WiFi or "eth0" for ethernet 
       rv$pcapinput<-rbind(rv$pcapinput, pcapinput, fill=TRUE)
       rv$pcapinput<-rv$pcapinput[!duplicated(rv$pcapinput)]
       } })

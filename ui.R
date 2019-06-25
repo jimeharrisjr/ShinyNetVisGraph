@@ -3,7 +3,7 @@ library(shinydashboard)
 library(visNetwork)
 
 ## ui.R ##
-library(shinydashboard)
+
 
 dashboardPage(
   dashboardHeader(title='Network Monitor'),
