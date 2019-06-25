@@ -32,7 +32,7 @@ shinyServer(function(input, output, session) {
       pcapinput[,source:=(ifelse(layer_2_src=="",as.character(layer_1_src),as.character(layer_2_src)))]
       pcapinput[,destination:=(ifelse(layer_2_dst=="",as.character(layer_1_dst),as.character(layer_2_dst)))]
       nodes<-unique(c(as.character(pcapinput$source),as.character(pcapinput$destination)))
-      print(nodes)
+
       
       # make a vector (bunch of entries strung together) for the color.
       # Think of a vector as a line of little boxes - each one numbered - containing some entry
@@ -72,7 +72,7 @@ shinyServer(function(input, output, session) {
       # Our edge data frame will take our "Source" and "Destination columns from our pcap and make them "from" and "to" of a graph
       # We use the "Protocol" column to label the arrows of our graph
       edgeData<-data.frame(from=as.character(pcapinput$source), label=pcapinput$layer_3_id, to=as.character(pcapinput$destination), tooltip=pcapinput$layer_2_id, length=(pcapinput$layer_1_size)*200, stringsAsFactors = FALSE)
-      #print(nodeData)
+      
       visNetwork(nodeData, edgeData, main = "Network Plot", width = "100%", height='1200px')  %>% visEdges(arrows = "to") %>% 
         visIgraphLayout(type='full', layout='layout_with_fr') %>% 
         visOptions(highlightNearest = TRUE) %>%  visIgraphLayout(randomSeed=123,layout = "layout_with_kk")
