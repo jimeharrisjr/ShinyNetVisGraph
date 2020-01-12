@@ -4,6 +4,7 @@ library(visNetwork)
 library(igraph)
 library(Rtins)
 library(data.table)
+library(DT)
 shinyServer(function(input, output, session) {
   rv <- reactiveValues(pcapinput=NULL,run=FALSE)
   
@@ -28,9 +29,10 @@ shinyServer(function(input, output, session) {
     if (is.data.table(rv$pcapinput)){
       
       pcapinput<-rv$pcapinput
-      output$datatable<-renderDataTable(pcapinput,options = list(scrollX = TRUE))
+     
       pcapinput[,source:=(ifelse(layer_2_src=="",as.character(layer_1_src),as.character(layer_2_src)))]
       pcapinput[,destination:=(ifelse(layer_2_dst=="",as.character(layer_1_dst),as.character(layer_2_dst)))]
+      output$datatable<-DT::renderDataTable(pcapinput,options = list(scrollX = TRUE))
       nodes<-unique(c(as.character(pcapinput$source),as.character(pcapinput$destination)))
 
       

@@ -16,7 +16,7 @@ dashboardPage(
                     actionButton("resetbutt","Reset"),
                     visNetworkOutput("network", height = '900px'), width = "90%", height = "100%"
   )),tabItem(tabName = 'spreadsheet', fluidRow(box(title = 'Network Data', 
-                                                   dataTableOutput('datatable')
+                                                   DT::dataTableOutput('datatable')
                                                    ,width=12)
                                                ,width=12)#row
              ))
