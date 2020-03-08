@@ -14,6 +14,8 @@ shinyServer(function(input, output, session) {
     autoInvalidate()
     isolate({ if (rv$run) { 
 # Configure this section for your machine      
+      # If the below errors out on a Mac, your user may not haver permissions to access the interface due to Apple's overwrought sense of security
+      # In that event, one way to fix it is (from a terminal window) use `sudo chown $USER /dev/bpf*`
       pcapinput <- sniff_pcap('en0', num = 10) # NOTE: this is for a Mac - on Linux or Windows, it would be something like "wlan0" for WiFi or "eth0" for ethernet 
       rv$pcapinput<-rbind(rv$pcapinput, pcapinput, fill=TRUE)
       rv$pcapinput<-rv$pcapinput[!duplicated(rv$pcapinput)]
